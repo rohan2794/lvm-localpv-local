@@ -65,7 +65,7 @@ The orignal v1.0 dev roadmap [is here ](https://github.com/orgs/openebs/projects
 > | Name | Version |
 > | :--- | :--- |
 > | K8S | 1.20+ |
-> | Distro | Alpine, Arch, CentOS, Debian, Fedora, NixOS, SUSE, RHEL, Ubuntu |
+> | Distro | Alpine, Arch, CentOS, Debian, Fedora, NixOS, SUSE, Talos, RHEL, Ubuntu |
 > | Kernel | oldest supported kernel is 2.6 |
 > | LVM2 | 2.03.21 |
 > | Min RAM | LVM2 is a kernel native module. It is very efficent and fast. It has no strict memory requirements |
