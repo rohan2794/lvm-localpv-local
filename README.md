@@ -1,4 +1,4 @@
-# OpenEBS LVM CSI Driver
+## OpenEBS - LVM-LocalPV CSI Driver
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fopenebs%2Flvm-localpv.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fopenebs%2Flvm-localpv?ref=badge_shield)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3523/badge)](https://bestpractices.coreinfrastructure.org/en/projects/4548)
 [![Slack](https://img.shields.io/badge/chat!!!-slack-ff1493.svg?style=flat-square)](https://kubernetes.slack.com/messages/openebs)
@@ -6,58 +6,99 @@
 [![Go Report](https://goreportcard.com/badge/github.com/openebs/lvm-localpv)](https://goreportcard.com/report/github.com/openebs/lvm-localpv)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenebs%2Flvm-localpv.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fopenebs%2Flvm-localpv?ref=badge_shield)
 
-<img width="300" align="right" alt="OpenEBS Logo" src="https://raw.githubusercontent.com/cncf/artwork/master/projects/openebs/stacked/color/openebs-stacked-color.png" xmlns="http://www.w3.org/1999/html">
 
-CSI driver for provisioning Local PVs backed by LVM and more.
+| [![Linux LVM2](https://github.com/openebs/website/blob/main/website/public/images/png/LVM_logo_1.png "Linux LVM2")](https://github.com/openebs/website/blob/main/website/public/images/png/LVM_logo_1.png) | The OpenEBS LVM-LocalPV Data-Engine is a mature and well deployed production grade CSI driver for dynamically provisioning Node Local Volumes into a K8s cluster utilizing the LINUX LVM2 Data / storage Mgmt stack as the storage backend. It integrates LVM2 into the OpenEBS platform and exposes many LVM2 services and capabilities.   |
+| :---  | :--- |
+<BR>
 
-## Project Status
+## Overview
+LVM-LocalPV CSI Driver becasme GA in August 2021 (with the release v0.8.0). It is now a a very mature product and a core component of the OpenEBS storage platform.
+Due to the major adoption of LVM-LocalPV (+50,000 users), this Data-Engine is now being unified and integrated into the core OpenEBS Storage platform; instead of being maintained as an external Data-Engine within our project.
 
-LVM-LocalPV CSI Driver is declared GA in August 2021 with the release version as 0.8.0.
+Our [2024 Roadmap is here](https://github.com/openebs/openebs/blob/main/ROADMAP.md). It defines a rich set of new featrues, which covers the integration of LVM-LocalPV into the core OpenEBS platform.<br>
+Please review this roadmp and feel free to pass back any feedback on it, as well as recommend and suggest new ideas regarding LVM-LocalPV. We welcome all your feedback.
+<br>
+<BR>
 
-## Project Tracker
+> **LVM-LocalPV is very popular** : Live OpenEBS systems actively report back product metrics every day, to our Global Anaytics metrics engine (unless disabled by the user).
+> Here are our key project popularity metrics as of: 01 Mar 2024 <BR>
+>
+> :rocket: &nbsp; OpenEBS is the #1 deployed Storage Platform for Kubernetes <BR>
+> :zap: &nbsp; LVM-LocalPV is the 3rd most deployed Data-Engine within the platform <BR>
+> :sunglasses: &nbsp; LVM-LocalPV has +50,000 Daily Acive Users <BR>
+> :sunglasses: &nbsp; LVM-LocalPV has +120,000 Global instllations <BR>
+> :floppy_disk: &nbsp; +49 Million OpenEBS Volumes have been deployed globally <BR>
+> :tv: &nbsp; We have +8 Million Global OpenEBS installations <BR>
+> :star: &nbsp; We are the [#1 GitHub Star ranked](https://github.com/openebs/website/blob/main/website/public/images/png/github_star-history-2024_Feb_1.png) K8s Data Storage platform <BR>
 
-See [roadmap](https://github.com/orgs/openebs/projects/30).
+<BR>
 
-## Usage
+## Dev Activity dashboard
+![Alt](https://repobeats.axiom.co/api/embed/baab8c2a9d1606494ab32714cbf91b65845a6001.svg "Repobeats analytics image")
 
-### Prerequisites
 
-Before installing LVM driver please make sure your Kubernetes Cluster
-must meet the following prerequisites:
+## Project info
+The orignal v1.0 dev roadmap [is here ](https://github.com/orgs/openebs/projects/30). This tracks our base historical engineering development work and is now somewhat out of date. We will be publish an updated 2024 Unified Roadmp soon, as ZFS-LoalPV is now being integrated and unified into the core OpenEBS storage platform.<BR>
 
-1. all the nodes must have lvm2 utils installed and the dm-snapshot kernel module loaded
-2. volume group has been setup for provisioning the volume
-3. You have access to install RBAC components into kube-system namespace.
-   The OpenEBS LVM driver components are installed in kube-system namespace
-   to allow them to be flagged as system critical components.
+<BR>
+
+## Usage and Deployment
+
+## Prerequisites
+
+
+> [!IMPORTANT]
+> Before installing the LVM-LocalPV driver please make sure your Kubernetes Cluster meets the following prerequisites:
+> 1. All the nodes must have LVM2 utils package installed
+> 2. All the nodes must have dm-snapshot Kernel Module loaded - (Device Mapper Snapshot)
+> 4. You have access to install RBAC components into kube-system namespace. The OpenEBS LVM driver components are installed in kube-system namespace to allow them to be flagged as system critical components.
+<BR>
+
+> [!NOTE]
+> - Full LVM2 dynamic provisioning is now supported <BR>
+> - All Volume Groups, Physical VOlumes and Logical Volumes will now be dynamically provisionsed for you by OpenEBS LVM-LocalPV  <BR>
+> - There is no requirements to manuallyu provison any PV, VG or LV  <BR>
+> - Dynamic RAID proviioning is currently under development. RAID LV's can only be deployed via manual pre configuiration <BR>
 
 ### Supported System
 
-K8S : 1.20+
+> | Name | Version |
+> | :--- | :--- |
+> | K8S | 1.20+ |
+> | Distro | Alpine, Arch, CentOS, Debian, Fedora, NixOS, SUSE, RHEL, Ubuntu |
+> | Kernel | oldest supported kernel is 2.6 |
+> | LVM2 | 2.03.21 |
+> | Min RAM | LVM2 is a kernel native module. It is very efficent and fast. It has no strict memory requirements |
+> Stability | LVM2 is extremly stable and very mature. The Kernel was released ~2005. It exists in most LINUX distros |
+<BR>
+<BR>
 
-OS : Ubuntu
+## Setup
 
-LVM version : LVM 2
-
-### Setup
-
-Find the disk which you want to use for the LVM, for testing you can use the loopback device
+Find the disk which you want to use for the LVM-LocalPV. Note: For testing you can use the loopback device.
 
 ```
 truncate -s 1024G /tmp/disk.img
 sudo losetup -f /tmp/disk.img --show
 ```
 
-Create the Volume group on all the nodes, which will be used by the LVM Driver for provisioning the volumes
+> [!NOTE]
+> - This is the old maual config process <BR>
+> - LVM-LocalPV will num dynamically provision the VG fro you <BR>
+> - The PV, VG and LV names will be dynamically provisioned by OpenEBS LVM-LocalPV as K8s unique entities (for safety, you cannot provide your own PV, VG or LV names)
+
+Create the Volume group on all the nodes, which will be used by the LVM2 Driver for provisioning the volumes
 
 ```
 sudo pvcreate /dev/loop0
 sudo vgcreate lvmvg /dev/loop0       ## here lvmvg is the volume group name to be created
 ```
+<BR>
+<BR>
 
-### Installation
+## Installation
 
-We can install the latest release of OpenEBS LVM driver by running the following command.
+Install the latest release of OpenEBS LVM2 LVM-LocalPV driver by running the following command. Note: All nodes must be running the same verison of LVM-LocalPV, LMV2, device-mapper & dm-snapshot.
 
 ```
 $ kubectl apply -f https://openebs.github.io/charts/lvm-operator.yaml
@@ -232,7 +273,3 @@ Features
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenebs%2Flvm-localpv.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fopenebs%2Flvm-localpv?ref=badge_large)
-
-## Repobeats
-
-![Alt](https://repobeats.axiom.co/api/embed/baab8c2a9d1606494ab32714cbf91b65845a6001.svg "Repobeats analytics image")
