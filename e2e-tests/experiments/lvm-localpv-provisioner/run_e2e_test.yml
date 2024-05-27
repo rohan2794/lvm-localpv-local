@@ -33,7 +33,7 @@ spec:
             # it with `ci` tag. for e.g. (openebs/lvm-driver:0.1.0). Leaving this env empty will 
             # apply the operator yaml with by default present `ci` tag i.e. `openebs/lvm-driver:ci`
           - name: LVM_DRIVER_IMAGE
-            value: ''
+            value: 'openebs/lvm-driver:ci'
             
             # This is the namespace where the LVM driver will create all its resources.
             # By default it is in openebs namespace. If we want to change it to use a different
@@ -45,7 +45,7 @@ spec:
             # on the nodes, use `true` as the value for this env else leave it blank.
             # by default this test will skip volume group creation of nodes.
           - name: VOLUME_GROUP_CREATION
-            value: ''
+            value: 'true'
 
             # In case if we have use value as `true` in `VOLUME_GROUP_CREATION` env, provide here
             # the name for volume group by which name it will be created via this test else leave blank.
@@ -63,7 +63,7 @@ spec:
             # If we want to use more than one disk give the names in space seperated format
             # for e.g. "/dev/sdb /dev/sdc"
           - name: PHYSICAL_VOLUME_DISKS
-            value: ''
+            value: '/dev/sdb'
 
             # In case if we have use value as `true` in `VOLUME_GROUP_CREATION` env, provide here
             # the name of nodes on which we want volume group to be created. Leaving this blank
@@ -76,7 +76,7 @@ spec:
             # provide `true` as the value for this env. by default test-specific value for this env is 
             # blank that means it will not create any storage-class in execution of this test.
           - name: STORAGE_CLASS_CREATION
-            value: ''
+            value: 'true'
 
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./e2e-tests/experiments/lvm-localpv-provisioner/test.yml -i /etc/ansible/hosts -v; exit 0"]
