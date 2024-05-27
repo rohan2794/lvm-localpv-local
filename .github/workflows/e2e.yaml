@@ -52,7 +52,11 @@ jobs:
         run: kubectl create -f ./e2e-tests/experiments/lvm-localpv-provisioner/run_e2e_test.yml
       - name: Run kubectl get pods -n e2e
         run: kubectl get pods -n e2e
-      - name: Run kubectl get pod -n e2e
+      - name: sleep
+        run: sleep 1m
+      - name: Run kubectl get pods -n e2e
+        run: kubectl get pods -n e2e
+      - name: stream logs
         run: kubectl logs -f $(kubectl get pods -n e2e -l app=lvm-localpv -o jsonpath='{.items[0].metadata.name}') -n e2e
   # e2e-test2:
   #   runs-on: ubuntu-latest
