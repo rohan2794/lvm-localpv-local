@@ -50,6 +50,11 @@ jobs:
         run: kubectl create -f ./e2e-tests/hack/crds.yaml && kubectl create -f ./e2e-tests/hack/rbac.yaml 
       - name: install lvm
         run: kubectl create -f ./e2e-tests/experiments/lvm-localpv-provisioner/run_e2e_test.yml
+      - name: Run kubectl get pods
+        run: kubectl get pods -A 
+      - name: Run kubectl get pod -n e2e
+        run: kubectl get logs -l app=lvm-localpv -n e2e -f
+      
   # e2e-test2:
   #   runs-on: ubuntu-latest
   #   strategy:
