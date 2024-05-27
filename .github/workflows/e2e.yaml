@@ -14,7 +14,10 @@
 name: build
 
 on:
-  - pull_request
+  create:
+  push:
+    branches:
+      - 'develop'
 
 jobs:
   e2e-test:

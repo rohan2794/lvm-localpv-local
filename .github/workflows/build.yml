@@ -14,19 +14,20 @@
 name: build
 
 on:
-  create:
-  push:
-    branches:
-      - 'develop'
-      - 'v*'
-    paths-ignore:
-      - '*.md'
-      - 'BUILDMETA'
-      - 'changelogs/**'
-      - 'deploy/helm/**'
-      - 'docs/**'
-      - 'LICENSE'
-      - 'MAINTAINERS'
+  - pull_request
+  # create:
+  # push:
+  #   branches:
+  #     - 'develop'
+  #     - 'v*'
+  #   paths-ignore:
+  #     - '*.md'
+  #     - 'BUILDMETA'
+  #     - 'changelogs/**'
+  #     - 'deploy/helm/**'
+  #     - 'docs/**'
+  #     - 'LICENSE'
+  #     - 'MAINTAINERS'
 
 jobs:
   lint:
