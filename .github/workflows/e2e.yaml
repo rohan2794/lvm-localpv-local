@@ -53,7 +53,7 @@ jobs:
       - name: Run kubectl get pods
         run: kubectl get pods -A 
       - name: Run kubectl get pod -n e2e
-        run: kubectl get logs -f -l app=lvm-localpv -n e2e
+        run: kubectl logs -f $(kubectl get pods -n e2e -l name=<label-value> -o jsonpath='{.items[0].metadata.name}') -n e2e
       
   # e2e-test2:
   #   runs-on: ubuntu-latest
