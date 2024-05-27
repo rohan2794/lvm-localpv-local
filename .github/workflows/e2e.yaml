@@ -18,10 +18,8 @@ on:
   push:
     branches:
       - 'develop'
-
 jobs:
   e2e-test:
-    needs: ['e2e-test']
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
@@ -49,7 +47,6 @@ jobs:
       - name: Run kubectl get node
         run: kubectl get node -owide 
   e2e-test2:
-    needs: ['e2e-test2']
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
